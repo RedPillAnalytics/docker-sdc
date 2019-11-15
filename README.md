@@ -16,3 +16,4 @@ Explanation of changes to the original Dockerfile should be detailed here (easie
   - stats package should come with the core install; may need to add back  
 - Added jdbc and google packages to install
   - streamsets-datacollector-jdbc-lib
+  - streamsets-datacollector-google-cloud-lib
