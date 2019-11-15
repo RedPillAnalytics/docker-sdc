@@ -55,15 +55,19 @@ RUN addgroup -S -g ${SDC_UID} ${SDC_USER} && \
 
 RUN cd /tmp && \
   curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-core-${SDC_VERSION}.tgz" && \
+  curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-jdbc-lib-${SDC_VERSION}.tgz" && \
+  curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-google-cloud-lib-${SDC_VERSION}.tgz" && \
   #curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" && \
   #curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" && \
   #curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz" && \
   tar xvf "streamsets-datacollector-core-${SDC_VERSION}.tgz" -C /opt/ && \
+  tar xvf "streamsets-datacollector-jdbc-lib-${SDC_VERSION}.tgz" -C /opt/ && \
+  tar xvf "streamsets-datacollector-google-cloud-lib-${SDC_VERSION}.tgz" -C /opt/ && \
   #tar xzf "streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" -C /opt/ && \
   #tar xzf "streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" -C /opt/ && \
   #tar xzf "streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz" -C /opt/ && \
   #rm  "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz"
-  rm  "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz"
+  rm  "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-google-cloud-lib-${SDC_VERSION}.tgz"
 
 # Add logging to stdout to make logs visible through `docker logs`.
 RUN sed -i 's|INFO, streamsets|INFO, streamsets,stdout|' "${SDC_DIST}/etc/sdc-log4j.properties"

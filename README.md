@@ -12,6 +12,7 @@ Explanation of changes to the original Dockerfile should be detailed here (easie
 
 - Updated version from 2.6.0.0 to 3.11.0
   - this will need to be managed as new SDC versions are rolled out.  
-
 - Removed Kafka, AWS, and stats packages from install
-  - stats package should come with the core install; may need to add back
+  - stats package should come with the core install; may need to add back  
+- Added jdbc and google packages to install
+  - streamsets-datacollector-jdbc-lib
