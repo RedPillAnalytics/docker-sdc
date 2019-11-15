@@ -11,4 +11,7 @@ The Docker repo can be found here: https://github.com/streamsets/datacollector-d
 Explanation of changes to the original Dockerfile should be detailed here (easier to find than surfing commits).  Yes I know that is the point of version control  
 
 - Updated version from 2.6.0.0 to 3.11.0
-  - this will need to be managed as new SDC versions are rolled out.
+  - this will need to be managed as new SDC versions are rolled out.  
+
+- Removed Kafka, AWS, and stats packages from install
+  - stats package should come with the core install; may need to add back

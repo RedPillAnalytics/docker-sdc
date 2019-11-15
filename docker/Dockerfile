@@ -23,7 +23,7 @@ FROM jeanblanchard/java:serverjre-8
 MAINTAINER Adam Kunicki <adam@streamsets.com>
 
 ARG SDC_USER=sdc
-ARG SDC_VERSION=2.6.0.0
+ARG SDC_VERSION=3.11.0
 
 # We set a UID/GID for the SDC user because certain test environments require these to be consistent throughout
 # the cluster. We use 20159 because it's above the default value of YARN's min.user.id property.
@@ -55,14 +55,15 @@ RUN addgroup -S -g ${SDC_UID} ${SDC_USER} && \
 
 RUN cd /tmp && \
   curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-core-${SDC_VERSION}.tgz" && \
-  curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" && \
-  curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" && \
-  curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz" && \
+  #curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" && \
+  #curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" && \
+  #curl -O -L "https://archives.streamsets.com/datacollector/${SDC_VERSION}/tarball/streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz" && \
   tar xvf "streamsets-datacollector-core-${SDC_VERSION}.tgz" -C /opt/ && \
-  tar xzf "streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" -C /opt/ && \
-  tar xzf "streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" -C /opt/ && \
-  tar xzf "streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz" -C /opt/ && \
-  rm  "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz"
+  #tar xzf "streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" -C /opt/ && \
+  #tar xzf "streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" -C /opt/ && \
+  #tar xzf "streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz" -C /opt/ && \
+  #rm  "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz"
+  rm  "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz"
 
 # Add logging to stdout to make logs visible through `docker logs`.
 RUN sed -i 's|INFO, streamsets|INFO, streamsets,stdout|' "${SDC_DIST}/etc/sdc-log4j.properties"
