@@ -20,7 +20,7 @@
 #
 
 FROM jeanblanchard/java:serverjre-8
-MAINTAINER Adam Kunicki <adam@streamsets.com>
+MAINTAINER Mike Fuller <mike.fuller@redpillanalytics.com>
 
 ARG SDC_USER=sdc
 ARG SDC_VERSION=3.11.0
@@ -67,7 +67,7 @@ RUN cd /tmp && \
   #tar xzf "streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" -C /opt/ && \
   #tar xzf "streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz" -C /opt/ && \
   #rm  "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-apache-kafka_0_10-lib-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-aws-lib-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-stats-lib-${SDC_VERSION}.tgz"
-  rm  "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-google-cloud-lib-${SDC_VERSION}.tgz"
+  rm  "/tmp/streamsets-datacollector-core-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-jdbc-lib-${SDC_VERSION}.tgz" "/tmp/streamsets-datacollector-google-cloud-lib-${SDC_VERSION}.tgz"
 
 # Add logging to stdout to make logs visible through `docker logs`.
 RUN sed -i 's|INFO, streamsets|INFO, streamsets,stdout|' "${SDC_DIST}/etc/sdc-log4j.properties"
@@ -92,11 +92,12 @@ RUN chown -R "${SDC_USER}:${SDC_USER}" "${SDC_DIST}/streamsets-libs" \
     "${SDC_RESOURCES}" \
     "${STREAMSETS_LIBRARIES_EXTRA_DIR}"
 
-COPY pre-stop.sh /tmp/
-RUN chmod +x /tmp/pre-stop.sh
+#COPY pre-stop.sh /tmp/
+#RUN chmod +x /tmp/pre-stop.sh
 
 USER ${SDC_USER}
 EXPOSE 18630
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["dc", "-exec"]
+ENTRYPOINT ["/opt/streamsets-datacollector-3.11.0/bin/streamsets", "dc"]
+#COPY docker-entrypoint.sh /
+#ENTRYPOINT ["/docker-entrypoint.sh"]
+#CMD ["dc", "-exec"]
