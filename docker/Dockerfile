@@ -97,7 +97,9 @@ RUN chown -R "${SDC_USER}:${SDC_USER}" "${SDC_DIST}/streamsets-libs" \
 
 USER ${SDC_USER}
 EXPOSE 18630
-ENTRYPOINT ["/opt/streamsets-datacollector-3.11.0/bin/streamsets", "dc"]
+ENTRYPOINT [ "sh", "-c", "$SDC_DIST/bin/streamsets dc" ]
+
+#ENTRYPOINT ["/opt/streamsets-datacollector-3.11.0/bin/streamsets", "dc"]
 #COPY docker-entrypoint.sh /
 #ENTRYPOINT ["/docker-entrypoint.sh"]
 #CMD ["dc", "-exec"]
