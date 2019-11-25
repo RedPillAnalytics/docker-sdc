@@ -1,7 +1,7 @@
 steps:
 - name: 'gcr.io/kaniko-project/executor:latest'
   args:
-  - --destination=gcr.io/$PROJECT_ID/sdc:$SHORT_SHA
+  - --destination=gcr.io/$PROJECT_ID/sdc:$_TAG
   - --cache=true
   - --cache-ttl=48h
   - --context=./
